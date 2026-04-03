@@ -1,4 +1,3 @@
-cat > README.md << 'EOF'
 # 🐍 经典贪吃蛇游戏 - 微信小程序版
 
 <div align="center">
@@ -16,12 +15,6 @@ cat > README.md << 'EOF'
 </div>
 
 ---
-
-## 📸 项目截图
-
-| 首页 | 游戏界面 | 排行榜 |
-|:---:|:---:|:---:|
-| ![首页](https://via.placeholder.com/200x400?text=Home+Page) | ![游戏](https://via.placeholder.com/200x400?text=Game+Play) | ![排行榜](https://via.placeholder.com/200x400?text=Ranking) |
 
 ## ✨ 功能特点
 
