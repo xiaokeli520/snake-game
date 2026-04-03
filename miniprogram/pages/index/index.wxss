@@ -1,0 +1,619 @@
+/* pages/index/index.wxss */
+.page {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #6a5acd, #483d8b);
+  padding: 50rpx 0;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+.biaoti{
+  text-align: center;
+  margin: 50rpx 0;
+}
+
+.biaoti-text{
+  font-size: 60rpx;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 0 0 20rpx rgba(255, 255, 255, 0.3);
+}
+
+.jieshao{
+  width: 100%;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  margin-bottom: 80rpx;
+  gap: 30rpx;
+} 
+
+.jieshao-he{
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);    
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20rpx;
+  padding: 40rpx 20rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center; 
+  text-align: left; 
+  gap: 10rpx;
+  width: 40%;
+  max-width: 600rpx;
+}
+
+.jieshao-img{
+  font-size: 60rpx;
+  color: #ffffff;
+}
+
+.jieshao-text{
+  font-size: 30rpx;
+  color: #ffffff;
+}
+
+.button-shouye{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30rpx;
+  margin-bottom: 80rpx;
+  padding: 0 40rpx;
+  box-sizing: border-box;
+}
+
+.button-game, .button-p{
+  padding: 30rpx;
+  border-radius: 30rpx;
+  border: none;
+  font-size: 34rpx;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.button-game{
+  background: linear-gradient(to right, #00cc66, #00a859);
+}
+
+.button-p{
+  background: linear-gradient(to right, #9370db, #7b5fcc);
+}
+
+.button-game::after, .button-p::after {
+  border: none;
+}
+
+.tongji{
+  display: flex;
+  justify-content: space-around;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 40rpx;
+  border-radius: 20rpx;
+  backdrop-filter: blur(10px);
+  margin: 80rpx 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8rpx 32rpx rgba(0, 0, 0, 0.1);
+  position: relative;
+  width: 100%;
+  max-width: 600rpx;
+  box-sizing: border-box;
+}
+
+.tongji-he{
+  text-align: center;
+  padding: 0 40rpx;
+}
+
+.tongji-num{
+  display: block;
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #4CAF50;
+  margin-bottom: 8rpx;
+}
+
+.tongji-text{
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 1rpx; 
+}
+
+/* 游戏页面样式 */
+.game-page {
+  padding: 0;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 30rpx;
+  background: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.game-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.score {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #4CAF50;
+}
+
+.time {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #2196F3;
+}
+
+.difficulty-display {
+  font-size: 24rpx;
+  color: #FFD700;
+}
+
+.back-btn {
+  background: #139465;
+  color: white;
+  font-size: 28rpx;
+  padding: 15rpx 25rpx;
+  border-radius: 20rpx;
+}
+
+.game-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.game-canvas {
+  width: 90vw; 
+  height: 70vw;
+  background: #2d2d2d;
+  border-radius: 10rpx;
+}
+
+/* 简化版方向控制 */
+.simple-controls {
+  display: flex;
+  justify-content: center;
+  padding: 20rpx 0;
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  border-radius: 20rpx;
+  margin: 30rpx 0;
+}
+
+.direction-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15rpx;
+}
+
+.dir-row {
+  display: flex;
+  gap: 20rpx;
+}
+
+.dir-btn {
+  width: 120rpx;
+  height: 120rpx;
+  background: linear-gradient(135deg, #6a5acd, #483d8b);
+  border: none;
+  color: white;
+  font-size: 40rpx;
+  font-weight: bold;
+  border-radius: 25rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5rpx 15rpx rgba(0,0,0,0.4);
+  transition: all 0.1s ease;
+}
+
+.dir-btn:active {
+  background: linear-gradient(135deg, #5a4acb, #382d7b);
+  transform: scale(0.95);
+  box-shadow: 0 3rpx 10rpx rgba(0,0,0,0.3);
+}
+
+.dir-btn.up, .dir-btn.down {
+  margin: 0 40rpx;
+}
+
+/* 难度选择弹窗 */
+.difficulty-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.difficulty-content {
+  background: linear-gradient(135deg, #6a5acd, #483d8b);
+  border-radius: 30rpx;
+  padding: 50rpx 40rpx;
+  width: 80%;
+  max-width: 600rpx;
+  box-shadow: 0 10rpx 50rpx rgba(0, 0, 0, 0.3);
+}
+
+.difficulty-title {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  display: block;
+  margin-bottom: 40rpx;
+}
+
+.difficulty-options {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.difficulty-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2rpx solid rgba(255, 255, 255, 0.3);
+  border-radius: 20rpx;
+  padding: 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10rpx;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.difficulty-btn:active {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(0.98);
+}
+
+.difficulty-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: white;
+}
+
+.difficulty-desc {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.difficulty-btn.easy {
+  border-color: #4CAF50;
+}
+
+.difficulty-btn.normal {
+  border-color: #2196F3;
+}
+
+.difficulty-btn.hard {
+  border-color: #FF6B6B;
+}
+
+.cancel-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2rpx solid rgba(255, 255, 255, 0.2);
+  border-radius: 20rpx;
+  padding: 25rpx;
+  color: white;
+  font-size: 28rpx;
+}
+
+/* 结算界面样式 */
+.result-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 30rpx;
+  padding: 60rpx 40rpx;
+  margin: 200rpx 40rpx 0;
+  text-align: center;
+  backdrop-filter: blur(20px);
+  width: 100%;
+  max-width: 600rpx;
+  box-sizing: border-box;
+}
+
+.result-title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 40rpx;
+}
+
+.result-score {
+  font-size: 36rpx;
+  color: #4CAF50;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.result-time {
+  font-size: 32rpx;
+  color: #2196F3;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.result-difficulty {
+  font-size: 28rpx;
+  color: #FFD700;
+  display: block;
+  margin-bottom: 50rpx;
+}
+
+.result-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.restart-btn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 25rpx;
+  border-radius: 25rpx;
+  font-size: 32rpx;
+}
+
+.home-btn {
+  background: #6a5acd;
+  color: white;
+  border: none;
+  padding: 25rpx;
+  border-radius: 25rpx;
+  font-size: 32rpx;
+}
+
+/* 排行榜样式 */
+.rank-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.rank-title {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: white;
+}
+
+/* 紧凑型筛选区域 */
+.rank-filters-compact {
+  padding: 20rpx 30rpx;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0 20rpx 20rpx;
+  border-radius: 20rpx;
+  backdrop-filter: blur(10px);
+}
+
+.filter-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.filter-item {
+
+}
+
+.filter-label {
+  display: block;
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 12rpx;
+  text-align: center;
+}
+
+.filter-picker {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2rpx solid rgba(255, 255, 255, 0.2);
+  border-radius: 20rpx;
+  padding: 20rpx;
+  text-align: center;
+}
+
+.picker-text {
+  font-size: 26rpx;
+  color: white;
+  font-weight: 500;
+}
+
+/* 用户排名卡片 */
+.user-rank-card {
+  background: linear-gradient(135deg, #6a5acd, #483d8b);
+  margin: 0 20rpx 20rpx;
+  padding: 30rpx;
+  border-radius: 20rpx;
+  text-align: center;
+  border: 1rpx solid rgba(255, 255, 255, 0.2);
+}
+
+.user-rank-title {
+  display: block;
+  font-size: 30rpx;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 15rpx;
+}
+
+.user-rank-score {
+  display: block;
+  font-size: 28rpx;
+  color: #4CAF50;
+  margin-bottom: 8rpx;
+  font-weight: 600;
+}
+
+.user-rank-position {
+  display: block;
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+/* 排行榜列表 */
+.rank-list {
+  height: calc(100vh - 400rpx);
+  padding: 0 20rpx;
+}
+
+.rank-item {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20rpx;
+  margin-bottom: 15rpx;
+  border-radius: 15rpx;
+  backdrop-filter: blur(10px);
+  border: 1rpx solid rgba(255, 255, 255, 0.1);
+}
+
+.rank-number {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26rpx;
+  font-weight: bold;
+  color: white;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.rank-number.top-1 {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  box-shadow: 0 4rpx 12rpx rgba(255, 215, 0, 0.3);
+}
+
+.rank-number.top-2 {
+  background: linear-gradient(135deg, #C0C0C0, #A0A0A0);
+  box-shadow: 0 4rpx 12rpx rgba(192, 192, 192, 0.3);
+}
+
+.rank-number.top-3 {
+  background: linear-gradient(135deg, #CD7F32, #A66A2A);
+  box-shadow: 0 4rpx 12rpx rgba(205, 127, 50, 0.3);
+}
+
+.rank-avatar {
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.avatar-icon {
+  font-size: 36rpx;
+}
+
+.rank-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.rank-name {
+  display: block;
+  font-size: 28rpx;
+  color: white;
+  font-weight: 600;
+  margin-bottom: 6rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rank-detail {
+  display: flex;
+  align-items: center;
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.7);
+  gap: 10rpx;
+}
+
+.difficulty-tag {
+  padding: 4rpx 12rpx;
+  border-radius: 12rpx;
+  font-size: 20rpx;
+  font-weight: 500;
+}
+
+.difficulty-tag.easy {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4CAF50;
+  border: 1rpx solid rgba(76, 175, 80, 0.3);
+}
+
+.difficulty-tag.normal {
+  background: rgba(33, 150, 243, 0.2);
+  color: #2196F3;
+  border: 1rpx solid rgba(33, 150, 243, 0.3);
+}
+
+.difficulty-tag.hard {
+  background: rgba(255, 107, 107, 0.2);
+  color: #FF6B6B;
+  border: 1rpx solid rgba(255, 107, 107, 0.3);
+}
+
+.rank-scores {
+  text-align: right;
+  flex-shrink: 0;
+  margin-left: 10rpx;
+}
+
+.rank-score {
+  display: block;
+  font-size: 28rpx;
+  color: #4CAF50;
+  font-weight: bold;
+  margin-bottom: 4rpx;
+}
+
+.rank-time {
+  display: block;
+  font-size: 22rpx;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.no-data {
+  text-align: center;
+  padding: 120rpx 0;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.no-data-tip {
+  display: block;
+  font-size: 24rpx;
+  margin-top: 20rpx;
+  color: rgba(255, 255, 255, 0.4);
+}

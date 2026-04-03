@@ -1,0 +1,170 @@
+<!-- pages/index/index.wxml -->
+<view class="page" wx:if="{{currentPage === 'home'}}">
+  <view class="biaoti">
+    <text class="biaoti-text">🐍 经典贪吃蛇</text>
+  </view>
+  
+  <view class="jieshao">
+    <view class="jieshao-he">
+      <text class="jieshao-img">⚡</text>
+      <text class="jieshao-text">多难度选择</text>
+    </view>
+    <view class="jieshao-he">
+      <text class="jieshao-img">🏆</text>
+      <text class="jieshao-text">全球排行榜</text>
+    </view>
+  </view>
+
+  <view class="button-shouye">
+    <button class="button-game" bindtap="showDifficultySelection">开始游戏</button>
+    <button class="button-p" bindtap="goToRank">排行榜</button>
+  </view>
+
+  <view class="tongji" wx:if="{{stats}}">
+    <view class="tongji-he">
+      <text class="tongji-num">{{stats.cs}}</text>
+      <text class="tongji-text">总游戏次数</text>
+    </view>
+    <view class="tongji-he">
+      <text class="tongji-num">{{stats.fs}}</text>
+      <text class="tongji-text">最高分数</text>
+    </view>
+  </view>
+</view>
+
+<!-- 难度选择弹窗 -->
+<view class="difficulty-modal" wx:if="{{showDifficultySelect}}">
+  <view class="difficulty-content">
+    <text class="difficulty-title">选择难度</text>
+    
+    <view class="difficulty-options">
+      <button class="difficulty-btn easy" data-difficulty="easy" bindtap="selectDifficulty">
+        <text class="difficulty-name">简单</text>
+        <text class="difficulty-desc">蛇速较慢，适合新手</text>
+      </button>
+      
+      <button class="difficulty-btn normal" data-difficulty="normal" bindtap="selectDifficulty">
+        <text class="difficulty-name">普通</text>
+        <text class="difficulty-desc">标准速度，经典体验</text>
+      </button>
+      
+      <button class="difficulty-btn hard" data-difficulty="hard" bindtap="selectDifficulty">
+        <text class="difficulty-name">困难</text>
+        <text class="difficulty-desc">蛇速很快，挑战极限</text>
+      </button>
+    </view>
+    
+    <button class="cancel-btn" bindtap="cancelDifficulty">取消</button>
+  </view>
+</view>
+
+<view class="page game-page" wx:if="{{currentPage === 'game'}}">
+  <view class="game-header">
+    <view class="game-info">
+      <text class="score">分数: {{score}}</text>
+      <text class="time">时间: {{timeText}}</text>
+      <text class="difficulty-display">难度: {{difficultyText}}</text>
+    </view>
+    <button class="back-btn" bindtap="backToHome">返回</button>
+  </view>
+  
+  <view class="game-area">
+    <canvas 
+      wx:if="{{!useOldCanvas}}"
+      id="gameCanvas" 
+      type="2d"
+      class="game-canvas"
+      bindtouchstart="onTouchStart" 
+      bindtouchmove="onTouchMove"
+    ></canvas>
+  </view>
+  
+  <!-- 简化版方向控制 -->
+  <view class="simple-controls">
+    <view class="direction-buttons">
+      <button class="dir-btn up" data-direction="up" bindtap="changeDirection">↑</button>
+      <view class="dir-row">
+        <button class="dir-btn left" data-direction="left" bindtap="changeDirection">←</button>
+        <button class="dir-btn right" data-direction="right" bindtap="changeDirection">→</button>
+      </view>
+      <button class="dir-btn down" data-direction="down" bindtap="changeDirection">↓</button>
+    </view>
+  </view>
+</view>
+
+<view class="page" wx:if="{{currentPage === 'result'}}">
+  <view class="result-card">
+    <text class="result-title">游戏结束</text>
+    <text class="result-score">得分: {{score}}</text>
+    <text class="result-time">时间: {{timeText}}</text>
+    <text class="result-difficulty">难度: {{difficultyText}}</text>
+    <view class="result-buttons">
+      <button class="restart-btn" bindtap="showDifficultySelection">再来一局</button>
+      <button class="home-btn" bindtap="backToHome">返回首页</button>
+    </view>
+  </view>
+</view>
+
+<view class="page" wx:if="{{currentPage === 'rank'}}">
+  <view class="rank-header">
+    <text class="rank-title">🏆 排行榜</text>
+    <button class="back-btn" bindtap="backToHome">返回首页</button>
+  </view>
+
+  <!-- 紧凑型筛选区域 -->
+  <view class="rank-filters-compact">
+    <view class="filter-row">
+      <view class="filter-item">
+        <text class="filter-label">排序方式</text>
+        <picker class="filter-picker" range="{{rankTypes}}" value="{{currentRankTypeIndex}}" bindchange="onRankTypeChange">
+          <view class="picker-text">{{rankTypes[currentRankTypeIndex]}}</view>
+        </picker>
+      </view>
+      
+      <view class="filter-item">
+        <text class="filter-label">难度筛选</text>
+        <picker class="filter-picker" range="{{difficultyOptions}}" value="{{currentDifficultyIndex}}" bindchange="onDifficultyChange">
+          <view class="picker-text">{{difficultyOptions[currentDifficultyIndex]}}</view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <!-- 用户个人排名 -->
+  <view class="user-rank-card" wx:if="{{userRank}}">
+    <view class="user-rank-info">
+      <text class="user-rank-title">我的最佳成绩</text>
+      <text class="user-rank-score">最高分: {{userRank.score}}</text>
+      <text class="user-rank-position">排名: {{userRank.rank || '--'}} / {{userRank.total}}</text>
+    </view>
+  </view>
+
+  <!-- 排行榜列表 -->
+  <scroll-view class="rank-list" scroll-y>
+    <view class="rank-item" wx:for="{{rankList}}" wx:key="index" 
+          wx:for-item="item" wx:for-index="index">
+      <view class="rank-number {{index < 3 ? 'top-' + (index + 1) : ''}}">
+        {{index + 1}}
+      </view>
+      <view class="rank-avatar">
+        <text class="avatar-icon">👤</text>
+      </view>
+      <view class="rank-info">
+        <text class="rank-name">{{item.nickname}}</text>
+        <text class="rank-detail">
+          <text class="difficulty-tag {{item.difficulty}}">{{item.difficulty === 'easy' ? '简单' : item.difficulty === 'normal' ? '普通' : '困难'}}</text>
+          · {{item.created_at ? item.created_at.split('T')[0] : ''}}
+        </text>
+      </view>
+      <view class="rank-scores">
+        <text class="rank-score">{{item.score}}分</text>
+        <text class="rank-time">{{formatRankTime(item.game_time)}}</text>
+      </view>
+    </view>
+    
+    <view class="no-data" wx:if="{{rankList.length === 0}}">
+      <text>暂无排行榜数据</text>
+      <text class="no-data-tip">快去玩一局游戏吧！</text>
+    </view>
+  </scroll-view>
+</view>
